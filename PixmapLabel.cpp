@@ -25,10 +25,7 @@ void PixmapLabel::setImage(const QPixmap& image)
     m_cols = m_pixmap.width();
     m_rows = m_pixmap.height();
 
-    auto scaled = m_pixmap.scaled(this->size() * devicePixelRatioF(), Qt::KeepAspectRatio, Qt::SmoothTransformation);
-    scaled.setDevicePixelRatio(devicePixelRatioF());
-
-    setPixmap(scaled); // <= this acts weird
+    setPixmap(scaledPixmap()); // <= this acts weird
 
     //update();  // <= this works
 }
@@ -60,6 +57,15 @@ int PixmapLabel::widthForHeight(int height) const
 }
 
 
+QPixmap PixmapLabel::scaledPixmap()
+{
+    auto scaled = m_pixmap.scaled(this->size() * devicePixelRatioF(), Qt::KeepAspectRatio, Qt::SmoothTransformation);
+    scaled.setDevicePixelRatio(devicePixelRatioF());
+
+    return scaled;
+}
+
+
 
 //void PixmapLabel::paintEvent(QPaintEvent* paintEvent)
 //{
@@ -81,11 +87,19 @@ int PixmapLabel::widthForHeight(int height) const
 
 //        // draw the pixmap
 //        painter.drawPixmap(QPoint(), scaled);
-
-//        qDebug() << "Label size after drawing: " << this->size();
 //    }
 //    else
 //    {
 //        QLabel::paintEvent(paintEvent);
 //    }
 //}
+
+
+void PixmapLabel::resizeEvent(QResizeEvent* event)
+{
+    Q_UNUSED(event);
+    if(!m_pixmap.isNull())
+    {
+        QLabel::setPixmap(scaledPixmap());
+    }
+}

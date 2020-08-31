@@ -14,9 +14,11 @@ class PixmapLabel : public QLabel
         void setImage(const QPixmap& image);
         int heightForWidth(int width) const override;
         int widthForHeight(int height) const;
+        QPixmap scaledPixmap();
     protected:
         //        virtual void paintEvent(QPaintEvent* paintEvent) override;
 
+        void resizeEvent(QResizeEvent* event) override;
     private:
 
         QPixmap m_pixmap;

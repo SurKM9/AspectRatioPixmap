@@ -23,5 +23,9 @@ class Dialog : public QDialog
 
     private:
         Ui::Dialog* ui;
+
+        // QWidget interface
+    protected:
+        virtual void resizeEvent(QResizeEvent* event) override;
 };
 #endif // DIALOG_H
