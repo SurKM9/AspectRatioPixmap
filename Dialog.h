@@ -23,14 +23,15 @@ class Dialog : public QDialog
 
         void on_pushButton_clicked();
 
+    protected:
+
+        virtual void resizeEvent(QResizeEvent* event) override;
+
     private:
 
         Ui::Dialog* ui;
         bool m_swap;
-
-        // QWidget interface
-    protected:
-
-        virtual void resizeEvent(QResizeEvent* event) override;
+        QImage m_image1;
+        QImage m_image2;
 };
 #endif // DIALOG_H

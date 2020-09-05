@@ -8,6 +8,8 @@ Dialog::Dialog(QWidget* parent)
     , m_swap(true)
 {
     ui->setupUi(this);
+    m_image1 = QImage(":/images/images/1.png");
+    m_image2 = QImage(":/images/images/2.jpg");
 }
 
 
@@ -23,15 +25,13 @@ void Dialog::on_pushButton_clicked()
 {
     if(m_swap)
     {
-        QImage image1(":/images/images/1.png");
-        ui->label->setImage(QPixmap::fromImage(image1));
+        ui->label->setImage(QPixmap::fromImage(m_image1));
 
         m_swap = false;
     }
     else
     {
-        QImage image2(":/images/images/2.jpg");
-        ui->label->setImage(QPixmap::fromImage(image2));
+        ui->label->setImage(QPixmap::fromImage(m_image2));
 
         m_swap = true;
     }
