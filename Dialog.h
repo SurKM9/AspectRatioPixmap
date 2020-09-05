@@ -15,17 +15,22 @@ class Dialog : public QDialog
         Q_OBJECT
 
     public:
+
         Dialog(QWidget* parent = nullptr);
         ~Dialog();
 
     private slots:
+
         void on_pushButton_clicked();
 
     private:
+
         Ui::Dialog* ui;
+        bool m_swap;
 
         // QWidget interface
     protected:
+
         virtual void resizeEvent(QResizeEvent* event) override;
 };
 #endif // DIALOG_H

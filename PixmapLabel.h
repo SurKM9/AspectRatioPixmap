@@ -8,17 +8,17 @@
 class PixmapLabel : public QLabel
 {
     public:
+
         PixmapLabel(QWidget* parent = nullptr);
         virtual QSize sizeHint() const override;
 
         void setImage(const QPixmap& image);
         int heightForWidth(int width) const override;
-        int widthForHeight(int height) const;
-        QPixmap scaledPixmap();
-    protected:
-        //        virtual void paintEvent(QPaintEvent* paintEvent) override;
 
-        void resizeEvent(QResizeEvent* event) override;
+    protected:
+
+        void paintEvent(QPaintEvent* event) override;
+
     private:
 
         QPixmap m_pixmap;

@@ -5,9 +5,12 @@
 Dialog::Dialog(QWidget* parent)
     : QDialog(parent)
     , ui(new Ui::Dialog)
+    , m_swap(true)
 {
     ui->setupUi(this);
 }
+
+
 
 Dialog::~Dialog()
 {
@@ -15,43 +18,28 @@ Dialog::~Dialog()
 }
 
 
+
 void Dialog::on_pushButton_clicked()
 {
-    ui->label_3->hide();
-    ui->label_4->hide();
+    if(m_swap)
+    {
+        QImage image1(":/images/images/1.png");
+        ui->label->setImage(QPixmap::fromImage(image1));
 
-    QImage image1(":/images/images/1.png");
-    ui->label->setImage(QPixmap::fromImage(image1));
+        m_swap = false;
+    }
+    else
+    {
+        QImage image2(":/images/images/2.jpg");
+        ui->label->setImage(QPixmap::fromImage(image2));
 
-    QImage image2(":/images/images/2.png");
-    ui->label_2->setImage(QPixmap::fromImage(image2));
+        m_swap = true;
+    }
 
-    QImage image3(":/images/images/3.jpg");
-    ui->label_3->setImage(QPixmap::fromImage(image3));
+    int w = ui->label->width();
+    int h = ui->label->heightForWidth(w);
 
-    QImage image4(":/images/images/4.png");
-    ui->label_4->setImage(QPixmap::fromImage(image4));
-
-
-    int h = ui->label->height();
-    int w = ui->label->widthForHeight(h);
-
-    qDebug() << "Width For height: " << w << "Height: " << h;
-
-    qDebug() << "label: " << ui->label->size();
-    qDebug() << "label_2: " << ui->label_2->size();
-    qDebug() << "label_3: " << ui->label_3->size();
-    qDebug() << "label_4: " << ui->label_4->size();
-
-    ui->label->setFixedWidth(w);
-    ui->label_2->setFixedWidth(w);
-    ui->label_3->setFixedWidth(w);
-    ui->label_4->setFixedWidth(w);
-
-    qDebug() << "label: " << ui->label->size();
-    qDebug() << "label_2: " << ui->label_2->size();
-    qDebug() << "label_3: " << ui->label_3->size();
-    qDebug() << "label_4: " << ui->label_4->size();
+    ui->label->setFixedHeight(h);
 }
 
 
@@ -60,25 +48,10 @@ void Dialog::resizeEvent(QResizeEvent* event)
 {
     Q_UNUSED(event);
 
-    int h = ui->label->height();
-    int w = ui->label->widthForHeight(h);
+    int w = ui->label->width();
+    int h = ui->label->heightForWidth(w);
 
-    qDebug() << "Width For height: " << w << "Height: " << h;
-
-    qDebug() << "label: " << ui->label->size();
-    qDebug() << "label_2: " << ui->label_2->size();
-    qDebug() << "label_3: " << ui->label_3->size();
-    qDebug() << "label_4: " << ui->label_4->size();
-
-    ui->label->setFixedWidth(w);
-    ui->label_2->setFixedWidth(w);
-    ui->label_3->setFixedWidth(w);
-    ui->label_4->setFixedWidth(w);
-
-    qDebug() << "label: " << ui->label->size();
-    qDebug() << "label_2: " << ui->label_2->size();
-    qDebug() << "label_3: " << ui->label_3->size();
-    qDebug() << "label_4: " << ui->label_4->size();
+    ui->label->setFixedHeight(h);
 }
 
 
