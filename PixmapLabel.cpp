@@ -1,6 +1,5 @@
 #include "PixmapLabel.h"
 #include <QPainter>
-#include <QDebug>
 #include <QPaintEvent>
 
 
@@ -51,12 +50,12 @@ void PixmapLabel::setImage(const QPixmap& image)
 
 /* virtual */ int PixmapLabel::heightForWidth(int width) const
 {
-    return (m_cols != 0) ? width * m_rows / m_cols : width;
+    return (m_cols != 0) ? width * m_rows / m_cols : this->height();
 }
 
 
 
-void PixmapLabel::paintEvent(QPaintEvent* event)
+/* virtual */ void PixmapLabel::paintEvent(QPaintEvent* event)
 {
     QLabel::paintEvent(event);
 
